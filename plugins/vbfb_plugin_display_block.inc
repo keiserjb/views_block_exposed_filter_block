@@ -19,4 +19,15 @@ class vbfb_plugin_display_block extends views_plugin_display_block {
     return TRUE;
   }
 
+  /**
+   * Block views use exposed widgets only if AJAX is set, or if it has it's
+   * exposed form as a block.
+   */
+  function uses_exposed() {
+    if ($this->use_ajax() || !empty($this->display->display_options['exposed_block'])) {
+      return views_plugin_display::uses_exposed();
+    }
+    return FALSE;
+  }
+
 }
