@@ -10,7 +10,12 @@
  * Base/helper class for Views Block Filter Block tests.
  */
 class ViewsBlockFilterBlockBase extends DrupalWebTestCase {
-  function setUp($modules = array()) {
+  function setUp() {
+    $modules = func_get_args();
+    if (isset($modules[0]) && is_array($modules[0])) {
+      $modules = $modules[0];
+    }
+
     // Enable views_ui.
     parent::setUp($modules + array('block', 'node', 'views', 'views_block_filter_block'));
 
