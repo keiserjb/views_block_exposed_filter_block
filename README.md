@@ -16,10 +16,13 @@ Installation
 ------------
 
 * Install this module using the official Backdrop CMS instructions at
-  <https://docs.backdropcms.org/documentation/extend-with-
+  <https://docs.backdropcms.org/documentation/extend-with-modules>.
+
+Differences from Drupal 7
 -------------------------
 
 * Should work the same as [Drupal 7](https://www.drupal.org/project/views_block_filter_block).
+
 Issues
 ------
 
