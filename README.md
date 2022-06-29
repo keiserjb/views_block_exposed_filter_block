@@ -19,7 +19,7 @@ Installation
   <https://docs.backdropcms.org/documentation/extend-with-
 -------------------------
 
-* Should work the same as Drupal 7.
+* Should work the same as [Drupal 7](https://www.drupal.org/project/views_block_filter_block).
 Issues
 ------
 
