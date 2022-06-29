@@ -1,0 +1,18 @@
+[ViewsBlockFilterBlockBase]
+name = ViewsBlockFilterBlockBase
+description = ViewsBlockFilterBlockBase
+group = views_block_filter_block
+file = tests/views_block_filter_block.test
+
+[ViewsBlockFilterBlockBasicUICase]
+name = Views Block Filter Block UI Tests
+description = Test creating a block view and ensure the exposed filter block option exists and is saved.
+group = VBFB
+file = tests/views_block_filter_block.test
+
+[ViewsBlockFilterBlockExposedBlockCase]
+name = Views Block Filter Exposed Block Tests
+description = Test creating placing and using an exposed filter block for a block display View.
+group = VBFB
+file = tests/views_block_filter_block.test
+

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_disable().
+ * Implements hook_disable().().
  */
 function views_block_filter_block_disable() {
   $views = views_get_all_views();

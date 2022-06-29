@@ -9,7 +9,7 @@
 /**
  * Base/helper class for Views Block Filter Block tests.
  */
-class ViewsBlockFilterBlockBase extends DrupalWebTestCase {
+class ViewsBlockFilterBlockBase extends BackdropWebTestCase {
   function setUp() {
     $modules = func_get_args();
     if (isset($modules[0]) && is_array($modules[0])) {
@@ -20,10 +20,10 @@ class ViewsBlockFilterBlockBase extends DrupalWebTestCase {
     parent::setUp($modules + array('block', 'node', 'views', 'views_block_filter_block'));
 
     // Create and log in a user with administer views permission.
-    $this->adminUser = $this->drupalCreateUser(array('administer modules', 'administer views', 'administer blocks', 'bypass node access', 'access user profiles', 'view revisions'));
-    $this->drupalLogin($this->adminUser);
+    $this->adminUser = $this->backdropCreateUser(array('administer modules', 'administer views', 'administer blocks', 'bypass node access', 'access user profiles', 'view revisions'));
+    $this->backdropLogin($this->adminUser);
 
-    variable_set('clean_url', TRUE);
+    config_set('system.performance', 'clean_url', TRUE);
   }
 
   /**
@@ -89,18 +89,18 @@ class ViewsBlockFilterBlockBasicUICase extends ViewsBlockFilterBlockBase {
     $view['description'] = $this->randomName(16);
     $view['page[create]'] = FALSE;
     $view['block[create]'] = TRUE;
-    $this->drupalPost('admin/structure/views/add', $view, t('Continue & edit'));
+    $this->backdropPost('admin/structure/views/add', $view, t('Continue & edit'));
 
     // Assert that the "exposed form in block" text exists; click and submit it.
     $this->assertText('Exposed form in block', 'Exposed form in block text exists.');
     $this->clickViewsOperationLink('No', '/exposed_block');
-    $this->drupalPost(NULL, array('exposed_block' => TRUE), 'Apply');
+    $this->backdropPost(NULL, array('exposed_block' => TRUE), 'Apply');
 
     // Save the view.
-    $this->drupalPost(NULL, array(), 'Save');
+    $this->backdropPost(NULL, array(), 'Save');
 
     // Ensure the view exists on the Views overview page.
-    $this->drupalGet('admin/structure/views');
+    $this->backdropGet('admin/structure/views');
     $this->assertText($view['human_name'], 'View saved successfully.');
 
     // Ensure the exposed block edit value was saved.
@@ -108,7 +108,7 @@ class ViewsBlockFilterBlockBasicUICase extends ViewsBlockFilterBlockBase {
     $this->clickViewsOperationLink('Yes', '/exposed_block');
 
     // Ensure the exposed form block exists.
-    $this->drupalGet('/admin/structure/block');
+    $this->backdropGet('/admin/structure/block');
     $this->assertText('Exposed form: ' . $view['name'] . '-block', 'Exposed form block created successfully.');
   }
 }
@@ -129,21 +129,21 @@ class ViewsBlockFilterBlockExposedBlockCase extends ViewsBlockFilterBlockBase {
     parent::setUp(array('views_block_filter_block_test'));
 
     // Clear all caches to ensure Views/blocks have been loaded.
-    drupal_flush_all_caches();
+    backdrop_flush_all_caches();
 
     // Move View blocks into visible regions.
     db_update('block')
       ->fields(array(
-        'region' => 'content',
-        'status' => 1,
-      ))
+      'region' => 'content',
+      'status' => 1,
+    ))
       ->condition('module', 'views')
       ->execute();
   }
 
   public function testPlacedBlock() {
     // Visit the front page, where the filter block should appear.
-    $this->drupalGet('node');
+    $this->backdropGet('node');
 
     // Ensure the configured filters are exposed.
     $this->assertFieldByName('status', 1, 'Found the exposed filter block.');
@@ -155,7 +155,7 @@ class ViewsBlockFilterBlockExposedBlockCase extends ViewsBlockFilterBlockBase {
     $this->assertEqual($action, $expected_url, 'The exposed filter block action is set correctly.');
 
     // Try using the exposed filter form.
-    $this->drupalGet($action . '?status=0');
+    $this->backdropGet($action . '?status=0');
 
     // Ensure the value was changed.
     $this->assertFieldByName('status', 0, 'The exposed filter form worked as expected.');
@@ -172,7 +172,7 @@ class ViewsBlockFilterBlockExposedBlockCase extends ViewsBlockFilterBlockBase {
 
     // Disable the module.
     $edit = array('modules[Views][views_block_filter_block][enable]' => FALSE);
-    $this->drupalPost('admin/modules', $edit, t('Save configuration'));
+    $this->backdropPost('admin/modules', $edit, t('Save configuration'));
 
     // Ensure the exposed filter block was removed on module disable.
     $select = db_select('block')

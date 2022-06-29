@@ -1,8 +1,7 @@
 name = Views Block Exposed Filter Block
 description = "Provides blocks for Views exposed filters on View blocks."
-core = 7.x
+backdrop = 1.x
+type = module
 package = Views
 dependencies[] = views
 
-files[] = plugins/vbfb_plugin_display_block.inc
-files[] = tests/views_block_filter_block.test

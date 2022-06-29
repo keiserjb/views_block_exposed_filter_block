@@ -7,17 +7,17 @@
 
 
 /**
- * Implements hook_views_api().
+ * Implements hook_views_api().().
  */
 function views_block_filter_block_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'views_block_filter_block') . '/includes',
+    'path' => backdrop_get_path('module', 'views_block_filter_block') . '/includes',
   );
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter().().
  */
 function views_block_filter_block_form_views_exposed_form_alter(&$form, &$form_state) {
   $view = $form_state['view'];
@@ -26,7 +26,16 @@ function views_block_filter_block_form_views_exposed_form_alter(&$form, &$form_s
   if (get_class($view->display_handler) == 'vbfb_plugin_display_block') {
     if ($view->display_handler->get_option('exposed_block')) {
       // Ensure that the fallback form action is the current page.
-      $form['#action'] = url(drupal_get_path_alias(), array('absolute' => TRUE));
+      $form['#action'] = url(backdrop_get_path_alias(), array('absolute' => TRUE));
     }
   }
+}
+
+/**
+ * Implements hook_autoload_info().
+ */
+function views_block_filter_block_autoload_info() {
+  return array(
+    'vbfb_plugin_display_block' => 'plugins/vbfb_plugin_display_block.inc',
+  );
 }
