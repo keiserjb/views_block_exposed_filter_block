@@ -23,12 +23,12 @@ Installation
 Issues
 ------
 
-Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/text_resize/issues).
+Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/views_block_filter_block/issues).
 
 Current Maintainers
 -------------------
 
-- [Justin Keiser](https://github.com/keiserjb).
+- [Justin Keiser](https://github.com/keiserjb)
 
 Credits
 -------
