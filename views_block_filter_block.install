@@ -6,7 +6,8 @@
  */
 
 /**
- * Implements hook_disable().().
+ * Implements hook_disable().
+().
  */
 function views_block_filter_block_disable() {
   $views = views_get_all_views();
@@ -31,13 +32,5 @@ function views_block_filter_block_disable() {
   // Iterate through all Views that need updating, and save them.
   foreach ($needs_save as $view_needs_save) {
     $view_needs_save->save();
-  }
-
-  // If there are displays that need deleting, delete them.
-  if ($block_needs_delete) {
-    db_delete('block')
-      ->condition('module', 'views')
-      ->condition('delta', $block_needs_delete, 'IN')
-      ->execute();
-  }
+  }  
 }
