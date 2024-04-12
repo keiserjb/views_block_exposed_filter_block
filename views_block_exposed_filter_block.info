@@ -1,0 +1,14 @@
+name = "Views Block Exposed Filter Block"
+"Provides blocks for Views exposed filters on View blocks."
+
+# This file exists as a workaround for a problem that was inherited by the 7.x
+# version of this module: all module files are named views_block_filter_block.xyz, but they live
+# inside a views_block_exposed_filter_block folder (but no matching views_block_exposed_filter_block.info and
+# views_block_exposed_filter_block.module files).
+$ See https://github.com/backdrop-contrib/node_clone/issues/8
+
+backdrop = 1.x
+type = module
+package = Views
+dependencies[] = views
+hidden = TRUE
