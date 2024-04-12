@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * Empty on purpose.
+ *
+ * This file exists as a workaround for a problem that was inherited by the 7.x
+ * version of this module: all module files are named cviews_block_filter_block.xyz, but they live
+ * inside a views_block_exposed_filter_block folder (but no matching views_block_exposed_filter_block.info and
+ * node_clone.module files).
+ * See https://github.com/backdrop-contrib/views_block_exposed_filter_block/issues/1
+ */
